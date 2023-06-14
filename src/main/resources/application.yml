@@ -1,0 +1,29 @@
+
+spring:
+
+  application:
+    name: qvb
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root123@
+    url: jdbc:mysql://localhost:3306/a?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
+  jpa:
+    open-in-view: false
+
+    properties:
+      hibernate:
+        session:
+          events:
+            log:
+              LOG_QUERIES_SLOWER_THAN_MS: '25'
+      hibernate.show_sql: true
+      hibernate.format_sql: true
+      hibernate.id.new_generator_mappings: false
+      hibernate.jdbc.fetch_size: 100
+      hibernate.jdbc.batch_size: 20
+      hibernate.hbm2ddl.auto: update
+      hibernate.generate_statistics: false
+      hibernate.enable_lazy_load_no_trans: true
+    database: mysql
+    defer-datasource-initialization: true
