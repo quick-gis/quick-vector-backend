@@ -16,9 +16,11 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/tools")
 @Controller
@@ -45,6 +47,11 @@ private static final Logger logger = LoggerFactory.getLogger(GeoJsonToShpCtr.cla
       // 清空response
       response.reset();
       toClient = new BufferedOutputStream(response.getOutputStream());
+
+      response.addHeader("Access-Control-Allow-Credentials", "true");
+      response.addHeader("Access-Control-Allow-Origin", "*");
+      response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+      response.addHeader("Access-Control-Allow-Headers", "Content-Type,X-CAF-Authorization-Token,sessionToken,X-TOKEN");
       response.setCharacterEncoding("UTF-8");
       response.setContentType("application/octet-stream");
       response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
