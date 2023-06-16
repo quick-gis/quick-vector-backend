@@ -27,3 +27,7 @@ spring:
       hibernate.enable_lazy_load_no_trans: true
     database: mysql
     defer-datasource-initialization: true
+#mybatis-plus 配置
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

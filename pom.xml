@@ -15,7 +15,10 @@
   <name>quick-vector-backend</name>
   <description>quick-vector-backend</description>
   <properties>
+    <geotools.version>30-SNAPSHOT</geotools.version>
     <java.version>17</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
   </properties>
   <dependencies>
     <dependency>
@@ -64,10 +67,52 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.12.0</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.8.19</version>
+    </dependency>
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-boot-starter</artifactId>
+      <version>3.5.3.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.github.filosganga/geogson-jts -->
+    <dependency>
+      <groupId>com.github.filosganga</groupId>
+      <artifactId>geogson-jts</artifactId>
+      <version>1.4.31</version>
+    </dependency>
 
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <!-- xml放在java目录下-->
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+        <filtering>false</filtering>
+      </resource>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>*.yml</include>
+          <include>*.yaml</include>
+          <include>*.properties</include>
+          <include>*.xml</include>
+        </includes>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -83,5 +128,20 @@
       </plugin>
     </plugins>
   </build>
-
+  <repositories>
+    <repository>
+      <id>osgeo</id>
+      <name>OSGeo Release Repository</name>
+      <url>https://repo.osgeo.org/repository/release/</url>
+      <snapshots><enabled>false</enabled></snapshots>
+      <releases><enabled>true</enabled></releases>
+    </repository>
+    <repository>
+      <id>osgeo-snapshot</id>
+      <name>OSGeo Snapshot Repository</name>
+      <url>https://repo.osgeo.org/repository/snapshot/</url>
+      <snapshots><enabled>true</enabled></snapshots>
+      <releases><enabled>false</enabled></releases>
+    </repository>
+  </repositories>
 </project>
