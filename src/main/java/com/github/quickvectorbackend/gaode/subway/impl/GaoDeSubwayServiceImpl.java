@@ -17,6 +17,8 @@ import com.github.quickvectorbackend.gaode.subway.mapper.GaoDeSubwayLineMapper;
 import com.github.quickvectorbackend.gaode.subway.mapper.GaoDeSubwayMapper;
 import com.github.quickvectorbackend.gaode.subway.mapper.GaoDeSubwaySiteMapper;
 import com.github.quickvectorbackend.gaode.subway.mapper.GaoDeSubwaySiteTimeMapper;
+import com.github.quickvectorbackend.utils.Gps;
+import com.github.quickvectorbackend.utils.PositionUtil;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,6 +176,7 @@ public class GaoDeSubwayServiceImpl implements GaoDeSubwayService {
 
               entity.setGdx(new BigDecimal(split[0]));
               entity.setGdy(new BigDecimal(split[1]));
+
             }
           }
 
@@ -258,9 +261,14 @@ public class GaoDeSubwayServiceImpl implements GaoDeSubwayService {
       GaoDeSubwaySiteEntity end = gaoDeSubwaySiteEntities.get(i + 1);
 
       try {
+        Gps gps = PositionUtil.gcj02_To_Gps84(start.getGdx().doubleValue(),
+            start.getGdy().doubleValue());
+        Gps gps1 = PositionUtil.gcj02_To_Gps84(end.getGdx().doubleValue(),
+            end.getGdy().doubleValue());
+        // TODO: 2023/6/16 坐标系互通 
         Geometry read = reader.read(
             "LineString (" + start.getGdx() + " " + start.getGdy() + "," + end.getGdx() + " "
-                + end.getGdx() + " )");
+                + end.getGdy() + " )");
         res.add(read);
       } catch (ParseException e) {
         e.printStackTrace();
